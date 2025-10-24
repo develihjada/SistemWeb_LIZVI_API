@@ -4,7 +4,7 @@
  */
 package com.Proyecto.Colegio.Response;
 
-import com.Proyecto.Colegio.dto.FamiliaDTO;
+import com.Proyecto.Colegio.dto.SubFamiliaDTO;
 import lombok.Data;
 import org.springframework.http.HttpStatus;
 import java.util.List;
@@ -15,17 +15,17 @@ import java.util.Collections;
  * @author Claudio Cruzado
  */
 @Data
-public class ResponseListaFamilia extends ResponseGlobal {
+public class ResponseListaSubFamilia extends ResponseGlobal {
     
-    private List<FamiliaDTO> familia;
+    private List<SubFamiliaDTO> subFamilia;
 
-    public ResponseListaFamilia(boolean exito, String mensaje, HttpStatus httpStatus, List<FamiliaDTO> familia) {
+    public ResponseListaSubFamilia(boolean exito, String mensaje, HttpStatus httpStatus, List<SubFamiliaDTO> subfamilia) {
         super(exito, mensaje, httpStatus);
-        this.familia = familia;
+        this.subFamilia = subfamilia;
     }
 
-    public ResponseListaFamilia(boolean exito, String mensaje, HttpStatus httpStatus) {
+    public ResponseListaSubFamilia(boolean exito, String mensaje, HttpStatus httpStatus) {
         super(exito, mensaje, httpStatus);
-        this.familia = Collections.emptyList();
+        this.subFamilia = Collections.emptyList();
     }
 }
