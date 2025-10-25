@@ -53,9 +53,9 @@ public class FamiliaController {
             } else {
                 String mensaje = "Familia listada con éxito.";
                 @SuppressWarnings("unchecked")
-                List<FamiliaDTO> documentosDTO = (List<FamiliaDTO>) dataList;
+                List<FamiliaDTO> familiaDTO = (List<FamiliaDTO>) dataList;
 
-                ResponseListaFamilia response = new ResponseListaFamilia(true, mensaje, HttpStatus.OK, documentosDTO);
+                ResponseListaFamilia response = new ResponseListaFamilia(true, mensaje, HttpStatus.OK, familiaDTO);
                 return new ResponseEntity<>(response, HttpStatus.OK);
             }
         } catch (DataAccessException e) {
