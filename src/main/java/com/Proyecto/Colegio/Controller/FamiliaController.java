@@ -22,6 +22,7 @@ import org.springframework.http.HttpStatus;
  * @author Claudio Cruzado
  */
 @RestController
+@CrossOrigin(origins="*")
 @RequestMapping("/Familia")
 public class FamiliaController {
 

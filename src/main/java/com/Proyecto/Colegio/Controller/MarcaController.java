@@ -4,11 +4,11 @@
  */
 package com.Proyecto.Colegio.Controller;
 
-import Request.RequestlistarUnidadMedida;
-import com.Proyecto.Colegio.Entity.UnidadMedida;
-import com.Proyecto.Colegio.Response.ResponseListaUnidadMedida;
-import com.Proyecto.Colegio.Service.UnidadMedidaService;
-import com.Proyecto.Colegio.dto.UnidadMedidaDTO;
+import Request.RequestlistarMarca;
+import com.Proyecto.Colegio.Entity.Marca;
+import com.Proyecto.Colegio.Response.ResponseListaMarca;
+import com.Proyecto.Colegio.Service.MarcaService;
+import com.Proyecto.Colegio.dto.MarcaDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,18 +22,18 @@ import org.springframework.http.HttpStatus;
  * @author Claudio Cruzado
  */
 @RestController
-@RequestMapping("/UnidadMedida")
+@RequestMapping("/Marca")
 @CrossOrigin(origins="*")
-public class UnidadMedidaController {
+public class MarcaController {
 
     @Autowired
-    private UnidadMedidaService unidadmedidaService;
+    private MarcaService marcaService;
 
     @PostMapping("/Mostrar")
-    public ResponseEntity<ResponseListaUnidadMedida> listarDocumentos(@RequestBody RequestlistarUnidadMedida requ) {
+    public ResponseEntity<ResponseListaMarca> listarDocumentos(@RequestBody RequestlistarMarca requ) {
         try {
-            List<UnidadMedida> unidadmedida = (List<UnidadMedida>) unidadmedidaService.listar(requ.getEstado());
-            List<?> dataList = unidadmedida;
+            List<Marca> marca = (List<Marca>) marcaService.listar(requ.getEstado());
+            List<?> dataList = marca;
 
             if (dataList.isEmpty()) {
                 String mensaje;
@@ -49,24 +49,24 @@ public class UnidadMedidaController {
                         mensaje = "No se encontró ningún elemento.";
                         break;
                 }
-                ResponseListaUnidadMedida response = new ResponseListaUnidadMedida(false, mensaje, HttpStatus.NOT_FOUND);
+                ResponseListaMarca response = new ResponseListaMarca(false, mensaje, HttpStatus.NOT_FOUND);
                 return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
             } else {
                 String mensaje = "Unidad de Medida listada con éxito.";
                 @SuppressWarnings("unchecked")
-                List<UnidadMedidaDTO> unidadmedidaDTO = (List<UnidadMedidaDTO>) dataList;
+                List<MarcaDTO> marcaDTO = (List<MarcaDTO>) dataList;
 
-                ResponseListaUnidadMedida response = new ResponseListaUnidadMedida(true, mensaje, HttpStatus.OK, unidadmedidaDTO);
+                ResponseListaMarca response = new ResponseListaMarca(true, mensaje, HttpStatus.OK, marcaDTO);
                 return new ResponseEntity<>(response, HttpStatus.OK);
             }
         } catch (DataAccessException e) {
             String mensaje = "Error al acceder a la base de datos. Intente más tarde.";
-            ResponseListaUnidadMedida response = new ResponseListaUnidadMedida(false, mensaje, HttpStatus.INTERNAL_SERVER_ERROR);
+            ResponseListaMarca response = new ResponseListaMarca(false, mensaje, HttpStatus.INTERNAL_SERVER_ERROR);
             return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 
         } catch (Exception e) {
             String mensaje = "Error interno inesperado del servidor.";
-            ResponseListaUnidadMedida response = new ResponseListaUnidadMedida(false, mensaje, HttpStatus.INTERNAL_SERVER_ERROR);
+            ResponseListaMarca response = new ResponseListaMarca(false, mensaje, HttpStatus.INTERNAL_SERVER_ERROR);
             return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
