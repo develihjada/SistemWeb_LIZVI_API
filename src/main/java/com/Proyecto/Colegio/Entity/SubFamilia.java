@@ -22,7 +22,9 @@ import lombok.NoArgsConstructor;
     procedureName = "MostrarSubFamilia",
     resultSetMappings = "MappingSubfamiliaDTO",
     parameters = {
-        @StoredProcedureParameter(mode = ParameterMode.IN, name = "estado", type = Integer.class)
+        @StoredProcedureParameter(mode = ParameterMode.IN, name = "estado", type = Integer.class),
+        @StoredProcedureParameter(mode = ParameterMode.IN, name = "idfamilia", type = Integer.class)
+            
     }
 )
 

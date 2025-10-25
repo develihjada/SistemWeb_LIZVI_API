@@ -25,58 +25,64 @@ import lombok.NoArgsConstructor;
  *
  * @author Claudio Cruzado
  */
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 
 @NamedStoredProcedureQuery(
-    name = "MostrarProductos",
-    procedureName = "MostrarProductos",
-    resultSetMappings = "MappingProductoListarDTO",
-    parameters = {
-        @StoredProcedureParameter(mode = ParameterMode.IN, name = "estado", type = Integer.class)
-    }
+        name = "MostrarProductos",
+        procedureName = "MostrarProductos",
+        resultSetMappings = "MappingProductoListarDTO",
+        parameters = {
+            @StoredProcedureParameter(mode = ParameterMode.IN, name = "estado", type = Integer.class),
+            @StoredProcedureParameter(mode = ParameterMode.IN, name = "idfamilia", type = Integer.class),
+            @StoredProcedureParameter(mode = ParameterMode.IN, name = "idsubfamilia", type = Integer.class)
+        }
 )
 @SqlResultSetMapping(
-    name = "MappingProductoListarDTO",
-    classes = {
-        @ConstructorResult(
-            targetClass = ProductoListaDTO.class,
-            columns = {
-                @ColumnResult(name = "id", type = Integer.class),
-                @ColumnResult(name = "producto", type = String.class),
-                @ColumnResult(name = "descripcion", type = String.class),
-                @ColumnResult(name = "precio", type = float.class),
-                @ColumnResult(name = "stock", type = float.class),
-                @ColumnResult(name = "estado", type = Integer.class),
-                @ColumnResult(name = "imagen", type = String.class)
-            }
-        )
-    }
+        name = "MappingProductoListarDTO",
+        classes = {
+            @ConstructorResult(
+                    targetClass = ProductoListaDTO.class,
+                    columns = {
+                        @ColumnResult(name = "id", type = Integer.class),
+                        @ColumnResult(name = "producto", type = String.class),
+                        @ColumnResult(name = "descripcion", type = String.class),
+                        @ColumnResult(name = "precio", type = float.class),
+                        @ColumnResult(name = "stock", type = float.class),
+                        @ColumnResult(name = "estado", type = Integer.class),
+                        @ColumnResult(name = "imagen", type = String.class),
+                        @ColumnResult(name = "idsubfamilia", type = Integer.class),
+                        @ColumnResult(name = "subfamilia", type = String.class),
+                        @ColumnResult(name = "idfamilia", type = Integer.class),
+                        @ColumnResult(name = "familia", type = String.class)
+                    }
+            )
+        }
 )
 @Entity
 @Table(name = "Producto")
 public class Producto {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    
+
     @Column(name = "producto")
     private String producto;
 
     @Column(name = "descripcion")
     private String descripcion;
-    
+
     @Column(name = "precio")
     private float precio;
 
     @Column(name = "stock")
     private float stock;
-    
+
     @Column(name = "idsubfamilia")
     private int idsubfamilia;
-    
+
     @Column(name = "idunidadmedida")
     private int idunidadmedida;
 
@@ -85,7 +91,7 @@ public class Producto {
 
     @Column(name = "estado")
     private int estado;
-    
+
     @Column(name = "imagen")
     private String imagen;
 }

@@ -4,7 +4,6 @@
  */
 package com.Proyecto.Colegio.Repository;
 
-
 import com.Proyecto.Colegio.Entity.Producto;
 import com.Proyecto.Colegio.dto.ProductoListaDTO;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -22,6 +21,16 @@ import java.util.List;
 public interface ProductoRepository extends JpaRepository<Producto, Integer> {
 
     @Procedure(name = "MostrarProductos")
-    List<ProductoListaDTO> mostrarProductos(@Param("estado") int estado);
-    
+    List<ProductoListaDTO> mostrarProductos(@Param("estado") int estado, @Param("idfamilia") int idfamilia, @Param("idsubfamilia") int idsubfamilia);
+
+    @Procedure(name = "InsertarProducto")
+    void insertarProducto(@Param("producto") String producto,
+            @Param("descripcion") String descripcion,
+            @Param("precio") float precio,
+            @Param("stock") float stock,
+            @Param("idsubfamilia") int idsubfamilia,
+            @Param("idunidadmedida") int idunidadmedida,
+            @Param("idmarca") int idmarca,
+            @Param("imagen") String imagen);
+
 }

@@ -23,7 +23,8 @@ import java.util.List;
 public interface SubFamiliaRepository extends JpaRepository<SubFamilia, Integer> {
 
     @Procedure(name = "MostrarSubFamilia")
-    List<SubFamiliaDTO> mostrarSubFamilia(@Param("estado") int estado);
+    List<SubFamiliaDTO> mostrarSubFamilia(@Param("estado") int estado,
+            @Param("idfamilia") int idfamilia);
     
 //    @Procedure(name = "ExisteTipoDocumento")
 //    List<Familia> existeTipoDocumento(@Param("descripcion") String descripcion);

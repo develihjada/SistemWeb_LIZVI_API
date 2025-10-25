@@ -16,4 +16,6 @@ import lombok.Setter;
 @Setter
 public class RequestlistarProducto {
     private int estado;
+    private int idfamilia;
+    private int idsubfamilia;
 }

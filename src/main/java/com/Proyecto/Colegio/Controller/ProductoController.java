@@ -4,10 +4,10 @@
  */
 package com.Proyecto.Colegio.Controller;
 
-
-
-
+import Request.RequestcrearProducto;
 import Request.RequestlistarProducto;
+import com.Proyecto.Colegio.Entity.Producto;
+import com.Proyecto.Colegio.Response.ResponseGlobal;
 import com.Proyecto.Colegio.Response.ResponseListaProducto;
 import com.Proyecto.Colegio.Service.ProductoService;
 import com.Proyecto.Colegio.dto.ProductoListaDTO;
@@ -25,7 +25,7 @@ import org.springframework.http.HttpStatus;
  */
 @RestController
 @RequestMapping("/Productos")
-@CrossOrigin(origins="*")
+@CrossOrigin(origins = "*")
 public class ProductoController {
 
     @Autowired
@@ -34,7 +34,7 @@ public class ProductoController {
     @PostMapping("/Mostrar")
     public ResponseEntity<ResponseListaProducto> listarProductos(@RequestBody RequestlistarProducto requ) {
         try {
-            List<ProductoListaDTO> producto = (List<ProductoListaDTO>) productoService.listar(requ.getEstado());
+            List<ProductoListaDTO> producto = (List<ProductoListaDTO>) productoService.listar(requ.getEstado(), requ.getIdfamilia(), requ.getIdsubfamilia());
 
             if (producto.isEmpty()) {
                 String mensaje;
@@ -71,5 +71,28 @@ public class ProductoController {
         }
     }
 
+    @PostMapping("/Insertar")
+    public ResponseEntity<ResponseGlobal> crearProducto(@RequestBody RequestcrearProducto requ) {
+
+        ResponseGlobal responseGlobal;
+
+        try {
+            productoService.guardar(requ);
+
+            String mensaje = "Producto insertado correctamente.";
+            responseGlobal = new ResponseGlobal(true, mensaje, HttpStatus.CREATED);
+            return new ResponseEntity<>(responseGlobal, HttpStatus.CREATED);
+
+        } catch (DataAccessException e) {
+            String mensaje = "Error al acceder a la base de datos. No se pudo insertar el producto.";
+            responseGlobal = new ResponseGlobal(false, mensaje, HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(responseGlobal, HttpStatus.INTERNAL_SERVER_ERROR);
+
+        } catch (Exception e) {
+            String mensaje = "Error interno inesperado del servidor. No se pudo insertar el producto.";
+            responseGlobal = new ResponseGlobal(false, mensaje, HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(responseGlobal, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
 }

@@ -25,8 +25,19 @@ public class ProductoService {
     private ProductoRepository productoRepository;
 
     @Transactional(readOnly = true)
-    public List<ProductoListaDTO> listar(int estado) {
-        return productoRepository.mostrarProductos(estado);
+    public List<ProductoListaDTO> listar(int estado, int idfamilia, int idsubfamilia) {
+        return productoRepository.mostrarProductos(estado, idfamilia, idsubfamilia);
+    }
+    
+    public void guardar(Request.RequestcrearProducto dto) {
+        productoRepository.insertarProducto(dto.getProducto(),
+                dto.getDescripcion(),
+                dto.getPrecio(),
+                dto.getStock(),
+                dto.getIdsubfamilia(),
+                dto.getIdunidadmedida(),
+                dto.getIdmarca(),
+                dto.getImagen());
     }
     
     

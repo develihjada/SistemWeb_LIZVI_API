@@ -33,7 +33,7 @@ public class SubfamiliaController {
     @PostMapping("/Mostrar")
     public ResponseEntity<ResponseListaSubFamilia> listarSubfamilia(@RequestBody RequestlistarSubFamilia requ) {
         try {
-            List<SubFamiliaDTO> apoderados = (List<SubFamiliaDTO>) subFamiliaservice.listar(requ.getEstado());
+            List<SubFamiliaDTO> apoderados = (List<SubFamiliaDTO>) subFamiliaservice.listar(requ.getEstado(), requ.getIdfamilia());
 
             if (apoderados.isEmpty()) {
                 String mensaje;

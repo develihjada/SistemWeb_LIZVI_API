@@ -12,9 +12,16 @@ import lombok.Setter;
  * @author Claudio Cruzado
  */
 
-@Setter
 @Getter
-public class RequestlistarSubFamilia {
-    private int estado;
-    private int idfamilia;
+@Setter
+public class RequestcrearProducto {
+    
+    private String producto;
+    private String descripcion;
+    private float precio;
+    private float stock;
+    private int idsubfamilia;
+    private int idunidadmedida;
+    private int idmarca;
+    private String imagen;
 }

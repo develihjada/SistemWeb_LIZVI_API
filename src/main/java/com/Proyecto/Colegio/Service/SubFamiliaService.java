@@ -25,7 +25,7 @@ public class SubFamiliaService {
     private SubFamiliaRepository subFamiliaRepository;
 
     @Transactional(readOnly = true)
-    public List<SubFamiliaDTO> listar(int estado) {
-        return subFamiliaRepository.mostrarSubFamilia(estado);
+    public List<SubFamiliaDTO> listar(int estado, int idfamilia) {
+        return subFamiliaRepository.mostrarSubFamilia(estado, idfamilia);
     }
 }

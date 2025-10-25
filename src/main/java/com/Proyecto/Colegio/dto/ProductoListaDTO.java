@@ -22,4 +22,8 @@ public class ProductoListaDTO {
     private float stock;
     private int estado;
     private String imagen;
+    private int idsubfamilia;
+    private String subfamilia;
+    private int idfamilia;
+    private String familia;
 }
