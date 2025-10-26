@@ -5,6 +5,7 @@
 package com.Proyecto.Colegio.Entity;
 
 import com.Proyecto.Colegio.dto.ProductoListaDTO;
+import com.Proyecto.Colegio.dto.ProductoListaDetalleDTO;
 import jakarta.persistence.Column;
 import jakarta.persistence.ColumnResult;
 import jakarta.persistence.ConstructorResult;
@@ -39,6 +40,7 @@ import lombok.NoArgsConstructor;
             @StoredProcedureParameter(mode = ParameterMode.IN, name = "idsubfamilia", type = Integer.class)
         }
 )
+
 @SqlResultSetMapping(
         name = "MappingProductoListarDTO",
         classes = {
@@ -56,6 +58,41 @@ import lombok.NoArgsConstructor;
                         @ColumnResult(name = "subfamilia", type = String.class),
                         @ColumnResult(name = "idfamilia", type = Integer.class),
                         @ColumnResult(name = "familia", type = String.class)
+                    }
+            )
+        }
+)
+
+@NamedStoredProcedureQuery(
+        name = "DetalleProducto",
+        procedureName = "DetalleProducto",
+        resultSetMappings = "MappingProductoListarDetalleDTO",
+        parameters = {
+            @StoredProcedureParameter(mode = ParameterMode.IN, name = "id", type = Integer.class)
+        }
+)
+
+@SqlResultSetMapping(
+        name = "MappingProductoListarDetalleDTO",
+        classes = {
+            @ConstructorResult(
+                    targetClass = ProductoListaDetalleDTO.class,
+                    columns = {
+                        @ColumnResult(name = "id", type = Integer.class),
+                        @ColumnResult(name = "producto", type = String.class),
+                        @ColumnResult(name = "descripcion", type = String.class),
+                        @ColumnResult(name = "precio", type = float.class),
+                        @ColumnResult(name = "stock", type = float.class),
+                        @ColumnResult(name = "estado", type = Integer.class),
+                        @ColumnResult(name = "imagen", type = String.class),
+                        @ColumnResult(name = "idsubfamilia", type = Integer.class),
+                        @ColumnResult(name = "subfamilia", type = String.class),
+                        @ColumnResult(name = "idfamilia", type = Integer.class),
+                        @ColumnResult(name = "familia", type = String.class),
+                        @ColumnResult(name = "idmarca", type = Integer.class),
+                        @ColumnResult(name = "marca", type = String.class),
+                        @ColumnResult(name = "idunidadmedida", type = Integer.class),
+                        @ColumnResult(name = "unidadmedida", type = String.class)
                     }
             )
         }
